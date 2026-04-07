@@ -38,7 +38,26 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
-    }
+    },
+
+    "Art Club": {
+    "description": "Explore painting and drawing techniques",
+    "schedule": "Wednesdays, 4:00 PM - 5:30 PM",
+    "max_participants": 15,
+    "participants": []
+},
+"Basketball Team": {
+    "description": "Practice basketball skills and teamwork",
+    "schedule": "Mondays and Fridays, 3:30 PM - 5:00 PM",
+    "max_participants": 12,
+    "participants": []
+},
+"Science Club": {
+    "description": "Conduct experiments and explore science topics",
+    "schedule": "Thursdays, 4:00 PM - 5:30 PM",
+    "max_participants": 10,
+    "participants": []
+}
 }
 
 
@@ -61,6 +80,9 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+    
+    if email in activity["participants"]:
+     raise HTTPException(status_code=400, detail="Student already signed up for this activity")
 
     # Add student
     activity["participants"].append(email)
